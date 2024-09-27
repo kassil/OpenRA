@@ -4,8 +4,8 @@ Player:
 		EarlyGameOver: true
 		GameOverDelay: 3000
 	Shroud:
-		FogCheckboxVisible: False
-		FogCheckboxLocked: True
+		FogCheckboxVisible: True
+		FogCheckboxLocked: False
 		FogCheckboxEnabled: True
 		ExploredMapCheckboxVisible: False
 		ExploredMapCheckboxLocked: True
