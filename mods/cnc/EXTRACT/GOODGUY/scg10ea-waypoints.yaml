@@ -1,0 +1,184 @@
+waypoint27: waypoint
+  Location: 18,17
+  Owner: Neutral
+waypoint26: waypoint
+  Location: 12,9
+  Owner: Neutral
+waypoint19: waypoint
+  Location: 33,57
+  Owner: Neutral
+waypoint18: waypoint
+  Location: 33,47
+  Owner: Neutral
+waypoint17: waypoint
+  Location: 19,18
+  Owner: Neutral
+waypoint15: waypoint
+  Location: 16,19
+  Owner: Neutral
+waypoint14: waypoint
+  Location: 17,28
+  Owner: Neutral
+waypoint13: waypoint
+  Location: 28,29
+  Owner: Neutral
+waypoint12: waypoint
+  Location: 32,43
+  Owner: Neutral
+waypoint11: waypoint
+  Location: 33,51
+  Owner: Neutral
+waypoint10: waypoint
+  Location: 45,16
+  Owner: Neutral
+waypoint9: waypoint
+  Location: 54,21
+  Owner: Neutral
+waypoint8: waypoint
+  Location: 53,34
+  Owner: Neutral
+waypoint7: waypoint
+  Location: 36,34
+  Owner: Neutral
+waypoint6: waypoint
+  Location: 22,7
+  Owner: Neutral
+waypoint5: waypoint
+  Location: 7,6
+  Owner: Neutral
+waypoint4: waypoint
+  Location: 7,15
+  Owner: Neutral
+waypoint3: waypoint
+  Location: 10,32
+  Owner: Neutral
+waypoint2: waypoint
+  Location: 29,37
+  Owner: Neutral
+waypoint1: waypoint
+  Location: 17,58
+  Owner: Neutral
+waypoint0: waypoint
+  Location: 32,39
+  Owner: Neutral
+
+CellTrigger1: waypoint
+  Trigger: atk4
+  Location: 35,41
+  Owner: Neutral
+CellTrigger2: waypoint
+  Trigger: atk4
+  Location: 34,41
+  Owner: Neutral
+CellTrigger3: waypoint
+  Trigger: atk4
+  Location: 33,41
+  Owner: Neutral
+CellTrigger4: waypoint
+  Trigger: atk4
+  Location: 32,41
+  Owner: Neutral
+CellTrigger5: waypoint
+  Trigger: atk4
+  Location: 31,41
+  Owner: Neutral
+CellTrigger6: waypoint
+  Trigger: atk4
+  Location: 30,41
+  Owner: Neutral
+CellTrigger7: waypoint
+  Trigger: atk4
+  Location: 29,41
+  Owner: Neutral
+CellTrigger8: waypoint
+  Trigger: atk4
+  Location: 28,41
+  Owner: Neutral
+CellTrigger9: waypoint
+  Trigger: atk4
+  Location: 27,41
+  Owner: Neutral
+CellTrigger10: waypoint
+  Trigger: atk4
+  Location: 26,41
+  Owner: Neutral
+CellTrigger11: waypoint
+  Trigger: atk4
+  Location: 25,41
+  Owner: Neutral
+CellTrigger12: waypoint
+  Trigger: atk4
+  Location: 24,41
+  Owner: Neutral
+CellTrigger13: waypoint
+  Trigger: atk4
+  Location: 23,41
+  Owner: Neutral
+CellTrigger14: waypoint
+  Trigger: atk4
+  Location: 22,41
+  Owner: Neutral
+CellTrigger15: waypoint
+  Trigger: atk4
+  Location: 21,41
+  Owner: Neutral
+CellTrigger16: waypoint
+  Trigger: atk4
+  Location: 35,40
+  Owner: Neutral
+CellTrigger17: waypoint
+  Trigger: atk4
+  Location: 34,40
+  Owner: Neutral
+CellTrigger18: waypoint
+  Trigger: atk4
+  Location: 33,40
+  Owner: Neutral
+CellTrigger19: waypoint
+  Trigger: atk4
+  Location: 32,40
+  Owner: Neutral
+CellTrigger20: waypoint
+  Trigger: atk4
+  Location: 31,40
+  Owner: Neutral
+CellTrigger21: waypoint
+  Trigger: atk4
+  Location: 30,40
+  Owner: Neutral
+CellTrigger22: waypoint
+  Trigger: atk4
+  Location: 29,40
+  Owner: Neutral
+CellTrigger23: waypoint
+  Trigger: atk4
+  Location: 28,40
+  Owner: Neutral
+CellTrigger24: waypoint
+  Trigger: atk4
+  Location: 27,40
+  Owner: Neutral
+CellTrigger25: waypoint
+  Trigger: atk4
+  Location: 26,40
+  Owner: Neutral
+CellTrigger26: waypoint
+  Trigger: atk4
+  Location: 25,40
+  Owner: Neutral
+CellTrigger27: waypoint
+  Trigger: atk4
+  Location: 24,40
+  Owner: Neutral
+CellTrigger28: waypoint
+  Trigger: atk4
+  Location: 23,40
+  Owner: Neutral
+CellTrigger29: waypoint
+  Trigger: atk4
+  Location: 22,40
+  Owner: Neutral
+CellTrigger30: waypoint
+  Trigger: atk4
+  Location: 21,40
+  Owner: Neutral
