@@ -16,7 +16,7 @@ Teams = {
             for idx, actor in ipairs(some) do
                 table.insert(members, actor)
             end
-            print(string.format('Trig %s: Recruit %d of %d %s', trigName, #members, amount, type))
+            print(string.format('Trig %s: Recruit %d of %d %s', trigName, #some, amount, type))
         end
         -- Give orders to the new team
         if team.Patrol then
