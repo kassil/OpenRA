@@ -40,6 +40,7 @@ Waypoints = {
 
 -- Teams
 GDI10aTeams = {
+	-- Two ARTYs move to the northwest cliffs overlooking GDI base
 	Art1 = {
 		Units = {arty = 2},
 		Attack_Base = {Wait = 30, Waypoints = {0, 2, 3, 4, 5, 6}},
@@ -48,6 +49,7 @@ GDI10aTeams = {
 		Units = {bggy = 2},
 		Attack_Units = {Wait = 30, Waypoints = {11, 12, 0, 7, 8, 9, 10}},
 	},
+	-- Bazookas patrol the entrance to their base
 	Move = {
 		Units = {e3 = 4},
 		Patrol = {Wait = 1, Waypoints = {18, 19}},
@@ -56,9 +58,17 @@ GDI10aTeams = {
 		Units = {e3 = 2, e4 = 2},
 		Attack_Units = {Wait = 50, Waypoints = {11, 12, 0, 2, 13, 14, 15}},
 	},
+	Nod2 = {
+		Units = {e3 = 2, e4 = 2},
+		Attack_Base = {Wait = 50, Waypoints = {11, 12, 0, 7, 8, 9, 10}},
+	},
 	Nod3 = {
 		Units = {e3 = 2, e4 = 2},
 		Attack_Units = {Wait = 30, Waypoints = {11, 12, 0, 13, 14, 15}},
+	},
+	Nod9 = {
+		Units = {e3 = 3, bggy = 1},
+		Attack_Units = {Wait = 40, Waypoints = {11, 12, 0, 13, 14}},
 	},
 	Nod12 = {
 		Units = {ltnk = 1, bggy = 1},
@@ -68,6 +78,24 @@ GDI10aTeams = {
 
 -- "Create Team" Triggers
 GDI10aTriggers = {
+	Arty = {
+		Action = 'Create Team',
+		Interval = DateTime.Minutes(5),
+		Team = GDI10aTeams.Art1,
+	},
+	-- Atk1,2,3 were originally Event=Discovered
+	Atk1 = {
+		Action = 'Damaged',
+		Team = GDI10aTeams.Nod1,
+	},
+	Atk2 = {
+		Action = 'Damaged',
+		Team = GDI10aTeams.Nod2,
+	},
+	Atk3 = {
+		Action = 'Damaged',
+		Team = GDI10aTeams.Nod9,
+	},
 	Atk5 = {
 		Action = 'Create Team',
 		Interval = DateTime.Minutes(6),
