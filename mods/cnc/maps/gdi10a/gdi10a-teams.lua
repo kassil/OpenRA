@@ -5,8 +5,8 @@ Teams = {
         Teams.Player = player
     end;
 
-    CreateTeam = function(team)
-        print('+ CreateTeam')
+    CreateTeam = function(trigName, team)
+        print('+ CreateTeam Trig:'..trigName)
         local members = {}
         -- Recruit idle units into our team
         for type, amount in pairs(team.Units) do
@@ -16,22 +16,23 @@ Teams = {
             for idx, actor in ipairs(some) do
                 table.insert(members, actor)
             end
-            print(string.format('  Recruit %d of %d %s', #members, amount, type))
+            print(string.format('Trig %s: Recruit %d of %d %s', trigName, #members, amount, type))
         end
-        print(string.format(' Recruited %d members', #members))
         -- Give orders to the new team
         if team.Patrol then
             local path = {}
             for idx, wpNum in ipairs(team.Patrol.Waypoints) do
                 local waypoint = Waypoints['waypoint'..tostring(wpNum)]
-                print(string.format('  Patrol (%d,%d)', waypoint.Location.X, waypoint.Location.Y))
+                print(string.format('Trig %s: Patrol (%d,%d)', trigName,
+                    waypoint.Location.X, waypoint.Location.Y))
                 table.insert(path, waypoint)
             end
             Patrol(members, path, DateTime.Seconds(6 * team.Patrol.Wait))
         elseif team.Attack_Base then
             for idx, wpNum in ipairs(team.Attack_Base.Waypoints) do
                 local waypoint = Waypoints['waypoint'..tostring(wpNum)]
-                print(string.format('  Attack_Base (%d,%d)', waypoint.Location.X, waypoint.Location.Y))
+                print(string.format('Trig %s: Attack_Base (%d,%d)', trigName,
+                    waypoint.Location.X, waypoint.Location.Y))
                 Utils.Do(members, function(actor)
                     if not actor or actor.IsDead then
                         return
@@ -42,7 +43,8 @@ Teams = {
         elseif team.Attack_Units then
             for idx, wpNum in ipairs(team.Attack_Units.Waypoints) do
                 local waypoint = Waypoints['waypoint'..tostring(wpNum)]
-                print(string.format('  Attack_Units (%d,%d)', waypoint.Location.X, waypoint.Location.Y))
+                print(string.format('Trig %s: Attack_Units (%d,%d)', trigName,
+                    waypoint.Location.X, waypoint.Location.Y))
                 Utils.Do(members, function(actor)
                     if not actor or actor.IsDead then
                         return
@@ -60,21 +62,22 @@ Teams = {
                 if order == 'MOVE' then
                     ---_G not defined??
                     local waypoint = Waypoints['waypoint'..tostring(arg)]
-                    print(string.format('  Waypoint %d: (%d,%d)', arg,
-                        waypoint.Location.X, waypoint.Location.Y))
+                    print(string.format('Trig %s: Waypoint %d: (%d,%d)', trigName,
+                        arg, waypoint.Location.X, waypoint.Location.Y))
                     MoveAndIdle(members, {waypoint})
                 elseif order == 'ATTACK UNITS' then
                     print('TODO ATTACK UNITS')
                 elseif order == 'ATTACK BASE' then
                     print('TODO ATTACK BASE')
                 else
-                    print(string.format('%s TODO Unknown order ',order))
+                    print(string.format('Trig %s: Unknown order %s ', trigName,
+                        order))
                 end
             end
         else
-            print('  WARN Team is missing orders')
+            print('Trig %s: WARN Team is missing orders', trigName)
         end
-        print('- CreateTeam')
+        print('- CreateTeam '..trigName)
     end;
 
     SendWaves = function(counter, Waves)
@@ -93,16 +96,16 @@ Teams = {
 Triggers = {
 
     Init = function(triggers)
-        for idx, trigger in pairs(triggers) do
-            print(string.format('DBG Initializing trigger %s: %s', idx, trigger.Action))
+        for trigName, trigger in pairs(triggers) do
+            print(string.format('DBG Initializing trigger %s: %s', trigName, trigger.Action))
             if trigger.Action == 'Create Team' then
                 trigger.Trigger = Trigger.AfterDelay(trigger.Interval,
                     function()
-                        print(string.format('DBG Creating %s team after %d', idx, trigger.Interval))
-                        Teams.CreateTeam(trigger.Team)
+                        print(string.format('DBG Trigger %s: Creating team after %d ticks', trigName, trigger.Interval))
+                        Teams.CreateTeam(trigName, trigger.Team)
                     end)
             else
-                print(string.format('ERROR Trigger_Init: %s Unknown action %s' .. idx, trigger.Action))
+                print(string.format('ERROR Trigger %s Unknown action %s', trigName, trigger.Action))
             end
         end
     end;
