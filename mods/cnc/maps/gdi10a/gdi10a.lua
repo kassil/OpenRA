@@ -38,13 +38,14 @@ Waypoints = {
 	waypoint19 = waypoint19,
 }
 
--- Teams
+-- AI Teams for this mission
 GDI10aTeams = {
 	-- Two ARTYs move to the northwest cliffs overlooking GDI base
 	Art1 = {
 		Units = {arty = 2},
 		Attack_Base = {Wait = 30, Waypoints = {0, 2, 3, 4, 5, 6}},
 	},
+	-- BGGYs approach GDI base from the southeast
 	Auto1 = {
 		Units = {bggy = 2},
 		Attack_Units = {Wait = 30, Waypoints = {11, 12, 0, 7, 8, 9, 10}},
@@ -54,29 +55,34 @@ GDI10aTeams = {
 		Units = {e3 = 4},
 		Patrol = {Wait = 1, Waypoints = {18, 19}},
 	},
+	-- Infantry approach GDI base from the southwest
 	Nod1 = {
 		Units = {e3 = 2, e4 = 2},
 		Attack_Units = {Wait = 50, Waypoints = {11, 12, 0, 2, 13, 14, 15}},
 	},
+	-- Infantry approach GDI base from the southeast
 	Nod2 = {
 		Units = {e3 = 2, e4 = 2},
 		Attack_Base = {Wait = 50, Waypoints = {11, 12, 0, 7, 8, 9, 10}},
 	},
+	-- Infantry approach GDI base from the southwest
 	Nod3 = {
 		Units = {e3 = 2, e4 = 2},
 		Attack_Units = {Wait = 30, Waypoints = {11, 12, 0, 13, 14, 15}},
 	},
+	-- Move into the western valley
 	Nod9 = {
 		Units = {e3 = 3, bggy = 1},
 		Attack_Units = {Wait = 40, Waypoints = {11, 12, 0, 13, 14}},
 	},
+	-- Vehicles approach GDI base from the southwest
 	Nod12 = {
 		Units = {ltnk = 1, bggy = 1},
 		Attack_Base = {Wait = 40, Waypoints = {11, 12, 0, 2, 13, 14, 15}},
 	},
 }
 
--- "Create Team" Triggers
+-- Triggers for this mission
 GDI10aTriggers = {
 	Arty = {
 		Action = 'Create Team',
