@@ -9,8 +9,9 @@
 
 Teams = {
 
-    Init = function(player)
-        Teams.Player = player
+    Init = function(aiPlayer, humanPlayer)
+        Teams.Player = aiPlayer
+        Teams.Human = humanPlayer
     end;
 
     CreateTeam = function(trigName, team)
@@ -107,11 +108,22 @@ Triggers = {
         for trigName, trigger in pairs(triggers) do
             print(string.format('DBG Initializing trigger %s: %s', trigName, trigger.Action))
             if trigger.Action == 'Create Team' then
-                trigger.Trigger = Trigger.AfterDelay(trigger.Interval,
+                trigger.TriggerId = Trigger.AfterDelay(trigger.Interval,
                     function()
                         print(string.format('DBG Trigger %s: Creating team after %d ticks', trigName, trigger.Interval))
                         Teams.CreateTeam(trigName, trigger.Team)
+                        trigger.TriggerId = nil
                     end)
+            elseif trigger.Action == 'Player Enters' then
+                trigger.TriggerId = Trigger.OnEnteredFootprint(trigger.CellTrigger,
+                    function(actor, id)
+                        if actor.Owner == Teams.Human then
+                            print(string.format('DBG Trigger %s: Cell trigger ', trigName))
+                            Teams.CreateTeam(trigName, trigger.Team)
+                            Trigger.RemoveFootprintTrigger(id) -- One shot
+                            trigger.TriggerId = nil
+                        end
+                end)
             else
                 print(string.format('ERROR Trigger %s Unknown action %s', trigName, trigger.Action))
             end

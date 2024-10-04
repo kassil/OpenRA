@@ -75,6 +75,11 @@ GDI10aTeams = {
 		Units = {e3 = 3, bggy = 1},
 		Attack_Units = {Wait = 40, Waypoints = {11, 12, 0, 13, 14}},
 	},
+	-- Two LTNKs traverse southern valley then return to base
+	Nod10 = {
+		Units = {ltnk = 2},
+		Attack_Base = {Wait = 30, Waypoints = {11, 12, 0, 7, 8, 19}},
+	},
 	-- Vehicles approach GDI base from the southwest
 	Nod12 = {
 		Units = {ltnk = 1, bggy = 1},
@@ -102,6 +107,15 @@ GDI10aTriggers = {
 		Action = 'Damaged',
 		Team = GDI10aTeams.Nod9,
 	},
+	Atk4 = {
+		Action = 'Player Enters',
+		Team = GDI10aTeams.Nod10,
+		CellTrigger = CellsToPositions({
+			2659, 2658, 2657, 2656, 2655, 2654, 2653, 2652, 2651, 2650, 2649, 2648,
+			2647, 2646, 2645, 2595, 2594, 2593, 2592, 2591, 2590, 2589, 2588, 2587,
+			2586, 2585, 2584, 2583, 2582, 2581,
+		}),
+	},
 	Atk5 = {
 		Action = 'Create Team',
 		Interval = DateTime.Minutes(6),
@@ -128,6 +142,10 @@ GDI10aTriggers = {
 		Team = GDI10aTeams.Move,
 	},
 }
+
+-- TODO Hunt=Destroyed,All to Hunt,0,None,None,1
+-- Obelisk, Refinery, Hand, Airstrip, Cyard, and the five nukes between cells 48:47 and 51:56
+-- Nod orders all units to hunt
 
 -- Attack waves
 AttackPaths =
@@ -202,54 +220,13 @@ WorldLoaded = function()
 	print('World Loaded!!!!!!')
 	Base.Init(Nod, RebuildableStructs, waypoint11.Location)
 
-	Teams.Init(Nod)
+	Teams.Init(Nod, GDI)
 	Triggers.Init(GDI10aTriggers)
 	--[[
 	Utils.Do(team, function(team)
 		Teams.CreateTeam(team)
 	end)
 	]]
-
-	--[[
-	Two light tanks attack as GDI approaches the Nod base from the valley's
-	southern exit. Trigger atk4 with team nod10. Cell numbers from scg10ea.ini.
-	]]
-	local cellTriggers_atk4 = CellsToPositions({
-		2659, 2658, 2657, 2656, 2655, 2654, 2653, 2652, 2651, 2650, 2649, 2648,
-		2647, 2646, 2645, 2595, 2594, 2593, 2592, 2591, 2590, 2589, 2588, 2587,
-		2586, 2585, 2584, 2583, 2582, 2581,
-	})
-	Atk4 = Trigger.OnEnteredFootprint(cellTriggers_atk4, function(actor, id)
-		if actor.Owner == GDI then
-			-- Create team nod10: two light tanks
-			local candidates = Nod.GetActorsByType('ltnk')
-			local team = {}
-			local s = 'DBG Atk4 Team=('
-			for i = 1, #candidates do
-				if not candidates[i].IsDead then
-					s = s .. ' ' .. ActorString(candidates[i])
-					table.insert(team, candidates[i])
-					if #team == 2 then
-						break
-					end
-				end
-			end
-			s = s .. ') attacking'
-			Media.Debug(s)
-			-- Move:11, Move:12, Move:0, Move:7, Move:8, Move:19
-			local moves = { waypoint11, waypoint12, waypoint0, waypoint7, waypoint8, waypoint19 }
-			Utils.Do(team, function(unit)
-				if not unit.IsDead then
-					for i = 1, #moves do
-						unit.AttackMove(moves[i].Location, 2)
-					end
-					-- Attack Base:30
-					unit.Hunt()
-				end
-			end)
-			Trigger.RemoveFootprintTrigger(id) -- One shot
-		end
-	end)
 end
 
 SendUnits = function(units, path)
@@ -289,7 +266,7 @@ end
 -- Build infantry or vehicles/armour
 ProduceUnitHelper = function(factory, prodParms)
 
-	local needHarvester = #Nod.GetActorsByType("harv") == 0 or BuildingHarvester
+	local needHarvester = #Nod.GetActorsByType('harv') < 2 or BuildingHarvester
 	if (factory.Type == 'hand' or factory.Type == 'pyle') and
 		BankBalance(Nod) <= Actor.Cost('harv')-1 and needHarvester then
 		-- Infantry on hold while we replace harvester
